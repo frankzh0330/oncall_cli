@@ -1,0 +1,25 @@
+id: diagnose-ck-not-correct
+version: 0.1.0
+status: draft
+description: Diagnose reports that ClickHouse data is missing, inconsistent, delayed, or incorrect.
+intents:
+  - ck_data_not_correct
+domains:
+  - data
+systems:
+  - clickhouse
+symptoms:
+  - data_not_correct
+  - data_missing
+  - data_inconsistent
+  - data_delayed
+required_context:
+  - environment
+  - time_range
+optional_context:
+  - database
+  - table
+  - query
+  - request_id
+risk: read_only
+
