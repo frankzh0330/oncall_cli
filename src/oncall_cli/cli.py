@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import sys
 from pathlib import Path
 from typing import Callable
 
@@ -43,6 +44,10 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main() -> None:
+    if len(sys.argv) > 1 and sys.argv[1] == "knowledge":
+        from .knowledge_cli import main as knowledge_main
+
+        raise SystemExit(knowledge_main(sys.argv[2:], project_root()))
     args = build_parser().parse_args()
     registry = SkillRegistry(args.skills_root).scan()
     if registry.errors:
@@ -69,4 +74,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
