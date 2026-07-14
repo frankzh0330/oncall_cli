@@ -1,10 +1,8 @@
 # Local oncall agent design
 
-## 1. Goal and boundary
+## 1. Goal
 
-The first version proves one complete control flow: accept a natural-language incident, discover skills, choose the correct skill, collect required context, and produce an evidence-backed report. It does not query ClickHouse or claim a root cause because the investigation workflow is intentionally not defined yet.
-
-This narrow boundary makes routing and interaction testable before production credentials and platform-specific tools are introduced. It also prevents a convincing but unsupported diagnosis.
+The first version proves one complete control flow: accept a natural-language incident, discover skills, choose the correct skill, collect required context, and produce an evidence-backed report.
 
 ## 2. Overall flow
 
@@ -114,8 +112,6 @@ Each case is saved as JSON. Local persistence supports audit, replay, and later 
 ## 8. Future tool gateway
 
 MySQL, ClickHouse, TCC, and repository access should enter through one tool gateway. Each call should declare its purpose, target, timeout, result limit, and evidence output. SQL must be parsed as read-only rather than accepted by a string-prefix check. ClickHouse queries also need scan limits. Responses should redact secrets and sensitive columns.
-
-This boundary stops skills from opening arbitrary connections and gives every source the same audit shape. The current version does not create empty clients because unused interfaces would encode guesses about internal systems.
 
 ## 9. Local metadata catalog
 
@@ -227,4 +223,4 @@ Local semantic use configures `ONCALL_EMBEDDING_PROVIDER=ollama` and pins `ONCAL
 4. Replace local storage and embedding execution with online services behind the same interfaces.
 5. Add authorization, audit, secret management, concurrent jobs, and observability.
 
-This order delivers a useful local loop first while preserving clear boundaries for later online migration.
+This order delivers a useful local loop first and supports later migration to online services.

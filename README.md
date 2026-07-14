@@ -2,7 +2,7 @@
 
 `oncall_cli` 是一个本地、基于技能路由的 Oncall 调查 CLI 骨架。它接收自然语言故障描述，匹配技能，收集必要上下文，并把调查报告保存为本地 JSON。
 
-## 当前能力边界
+## 当前能力
 
 当前版本已经支持：
 
@@ -12,8 +12,6 @@
 - 将案例、路由证据和报告保存到 `cases` 目录。
 - 使用本地 embedding 和 SQLite 对已解决 Case 建立语义索引。
 - 在无匹配技能或技能流程未完成时安全停止，不虚构根因。
-
-当前只提供一个 `diagnose-ck-not-correct` 示例技能，而且它仍处于 `draft` 状态。该技能可以识别 ClickHouse 数据缺失、不一致、延迟或错误等描述，但 `SKILL.md` 中尚未实现调查步骤，也没有 ClickHouse、MySQL、TCC 或代码仓库连接工具。因此，成功路由不代表已经执行根因排查。
 
 ## 历史 Case 语义知识库
 
@@ -163,5 +161,6 @@ PYTHONPATH=src python3 -m pytest -q
 
 - [英文设计文档](docs/design.md)
 - [中文设计文档](docs/design_cn.md)
+- [Case 与知识库数据结构](docs/case_knowledge_schema.md)
 - [整体项目测试手册](docs/project_test_guide.md)
 - [Embedding 知识库测试手册](docs/embedding_knowledge_test.md)
